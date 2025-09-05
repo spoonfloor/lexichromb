@@ -1,0 +1,14 @@
+[
+  {
+    "src": "/peace.png",
+    "width": 150,
+    "height": 150,
+    "alt": "Peace"
+  },
+  {
+    "src": "/love.png",
+    "width": 150,
+    "height": 150,
+    "alt": "Love"
+  }
+]
