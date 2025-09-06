@@ -1,0 +1,98 @@
+{
+  "levels": [
+    {
+      "hints": [
+        [
+          "slippers",
+          "a place in France",
+          "a letter",
+          "a tide",
+          "to abandon…",
+          "a flavor…",
+          "a drink"
+        ],
+        [
+          "a gem",
+          "a wine",
+          "a pimpernel",
+          "a scare",
+          "on an island",
+          "in soda, ice-cream & Chapstick",
+          "made from grapes"
+        ]
+      ],
+      "solutions": {
+        "text": [
+          "ruby",
+          "burgundy",
+          "scarlet",
+          "red",
+          "maroon",
+          "cherry",
+          "wine"
+        ],
+        "color": {
+          "ruby": "#9B111E",
+          "burgundy": "#800020",
+          "scarlet": "#FF2400",
+          "red": "#FF0000",
+          "maroon": "#800000",
+          "cherry": "#DE3163",
+          "wine": "#722F37"
+        },
+        "textContrast": {
+          "ruby": "light",
+          "burgundy": "light",
+          "scarlet": "light",
+          "red": "light",
+          "maroon": "light",
+          "cherry": "light",
+          "wine": "light"
+        }
+      }
+    },
+    {
+      "hints": [
+        [
+          "a stone",
+          "a plane",
+          "to throw…",
+          "a dodgey market",
+          "a bird",
+          "a tree",
+          "glassy rock…"
+        ],
+        [
+          "of agate",
+          "to go",
+          "a ball or away",
+          "wicked humor",
+          "a bad omen",
+          "and ivory",
+          "made by lava"
+        ]
+      ],
+      "solutions": {
+        "text": ["onyx", "jet", "pitch", "black", "raven", "ebony", "obsidian"],
+        "color": {
+          "onyx": "#353839",
+          "jet": "#343434",
+          "pitch": "#2C2C2C",
+          "black": "#000000",
+          "raven": "#474A51",
+          "ebony": "#555D50",
+          "obsidian": "#0F0F0F"
+        },
+        "textContrast": {
+          "onyx": "light",
+          "jet": "light",
+          "pitch": "light",
+          "black": "light",
+          "raven": "light",
+          "ebony": "light",
+          "obsidian": "light"
+        }
+      }
+    }
+  ]
+}

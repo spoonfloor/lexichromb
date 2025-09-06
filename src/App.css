@@ -1,10 +1,9 @@
 body,
 html,
 #root {
-  height: 100vh;
-  width: 100vw;
   margin: 0;
   background: hsl(0, 0%, 10%);
+  font-family: 'Red Hat Mono', monospace;
 }
 
 *,
@@ -13,10 +12,102 @@ html,
   box-sizing: border-box;
 }
 
-.centered {
+.app {
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100%;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  gap: 8px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cell {
+  height: 150px;
+  width: 300px;
+  background: white;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.2rem;
+  font-family: 'Red Hat Mono', monospace;
+
+  user-select: none;
+  text-align: center;
+  padding: 0 12px;
+  line-height: 1.4;
+  text-transform: none;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Darkening overlay behind content */
+.cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  z-index: 0;
+}
+
+/* .cell:hover::before {
+  background: rgba(0, 0, 0, 0.5);
+} */
+
+/* This wraps the main content so we can dim it */
+.cell-content {
   width: 100%;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  color: inherit;
+}
+
+/* Overlay container shown on hover */
+.hover-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2; /* above overlay and content */
+}
+
+/* Input (guess) styling */
+.hover-input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1.2rem;
+  font-family: 'Red Hat Mono', monospace;
+  width: 200px;
+  text-align: center;
+  background: white;
+  outline: none;
+}
+
+/* Button (hint) styling */
+.hover-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  background: white;
+  font-size: 1.2rem;
+  font-family: 'Red Hat Mono', monospace;
+  cursor: pointer;
+  outline: none;
+  width: 200px;
 }
