@@ -13,6 +13,8 @@ function Cell({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [hintClicked, setHintClicked] = useState(false);
+  const [guess, setGuess] = useState(''); // current text in the guess input
+  const [log, setLog] = useState([]); // optional visual log (debug)
 
   const renderPlaceholder = (revealFirstLetter = false) => {
     if (!solution) return null;
@@ -82,6 +84,32 @@ function Cell({
     onHintClick();
   };
 
+  // Called when the user presses Enter in the guess box
+  function submitGuess(value) {
+    const trimmed = value.trim();
+
+    // Log to console – replace with an API call if you need persistence
+    console.log('User guess:', trimmed);
+    console.log('Correct solution:', solution);
+
+    // Optional: keep a visible log inside the component (useful while testing)
+    setLog((prev) => [...prev, `guess="${trimmed}" | solution="${solution}"`]);
+  }
+
+  // Update state as the user types
+  const handleInputChange = (e) => {
+    setGuess(e.target.value);
+  };
+
+  // Detect Enter key → submit the guess
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // stop any default form behaviour
+      submitGuess(guess);
+      setGuess(''); // clear the field after submitting (optional)
+    }
+  };
+
   return (
     <div
       className='cell'
@@ -109,13 +137,12 @@ function Cell({
             position: 'absolute',
             inset: 0,
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 0,
-            borderRadius: '8px',
+            zIndex: 1,
           }}
         />
       )}
 
-      <div className='cell-content' style={{ position: 'relative', zIndex: 1 }}>
+      <div className='cell-content' style={{ position: 'relative', zIndex: 0 }}>
         {renderContent()}
       </div>
 
@@ -125,7 +152,14 @@ function Cell({
           <button className='hover-button' onClick={handleHintButtonClick}>
             hint
           </button>
-          <input type='text' placeholder='guess!' className='hover-input' />
+          <input
+            type='text'
+            placeholder='guess!'
+            className='hover-input'
+            value={guess} // controlled component
+            onChange={handleInputChange} // update `guess` state
+            onKeyDown={handleKeyDown} // submit on Enter
+          />
         </div>
       )}
     </div>
