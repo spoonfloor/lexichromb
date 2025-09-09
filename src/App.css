@@ -92,10 +92,9 @@ html,
   border-radius: 999px;
   font-size: 1.2rem;
   font-family: 'Red Hat Mono', monospace;
-  /* width: 200px; */
-  text-align: center;
   background: rgba(255, 255, 255, 0.88);
   outline: none;
+  padding-left: 16px;
 }
 
 /* Button (hint) styling */

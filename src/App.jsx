@@ -30,6 +30,13 @@ function App() {
     );
   };
 
+  // App.jsx – inside the component body
+  const handleCorrectGuess = (index) => {
+    setClickCounts(
+      (prev) => prev.map((cnt, i) => (i === index ? 5 : cnt)) // 5 → final solution
+    );
+  };
+
   const getTextColor = (contrast) => (contrast === 'light' ? '#fff' : '#000');
 
   // Split hints into columns: 2, 3, 2 cells
@@ -62,6 +69,7 @@ function App() {
                 onHintClick={() => handleHintClick(globalIndex)} // Pass new prop
                 defaultBg={DEFAULT_BG}
                 getTextColor={getTextColor}
+                onCorrectGuess={() => handleCorrectGuess(globalIndex)}
               />
             );
           })}

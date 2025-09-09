@@ -10,11 +10,12 @@ function Cell({
   defaultBg,
   getTextColor,
   onHintClick,
+  onCorrectGuess,
+  onIncorrectGuess,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [hintClicked, setHintClicked] = useState(false);
   const [guess, setGuess] = useState(''); // current text in the guess input
-  const [log, setLog] = useState([]); // optional visual log (debug)
 
   const renderPlaceholder = (revealFirstLetter = false) => {
     if (!solution) return null;
@@ -84,35 +85,14 @@ function Cell({
     onHintClick();
   };
 
-  // Called when the user presses Enter in the guess box
   function submitGuess(value) {
-    // Clean the incoming value the same way the input does
     const trimmed = value
       .trim()
       .toLowerCase()
       .replace(/[^a-z ]+/g, '');
 
-    // Compare with the solution (also lower‑cased for a case‑insensitive match)
-    const isMatch = trimmed === solution.toLowerCase();
-
-    // Log both strings
-    console.log('User guess:', trimmed);
-    console.log('Correct solution:', solution);
-
-    // Indicate match / mismatch
-    if (isMatch) {
-      console.log('✅ Guess matches the solution!');
-    } else {
-      console.log('❌ Guess does NOT match the solution.');
-    }
-
-    // Optional visual log (debug) – shows the result as well
-    setLog((prev) => [
-      ...prev,
-      `guess="${trimmed}" | solution="${solution}" | ${
-        isMatch ? 'MATCH' : 'NO MATCH'
-      }`,
-    ]);
+    // true → guess is correct
+    return trimmed === solution.toLowerCase();
   }
 
   // Update state as the user types – forces lowercase & allows only a‑z and spaces
@@ -125,12 +105,22 @@ function Cell({
 
     setGuess(cleaned);
   };
-  // Detect Enter key → submit the guess
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault(); // stop any default form behaviour
-      submitGuess(guess);
-      setGuess(''); // clear the field after submitting (optional)
+      e.preventDefault();
+
+      const isRight = submitGuess(guess); // true → correct
+
+      if (isRight) {
+        onCorrectGuess?.(); // tells App to set count = 5
+        alert('Nicely done!'); // ✅ success feedback
+      } else {
+        onIncorrectGuess?.(); // optional hook for App
+        alert('Try again, plz…'); // ❌ failure feedback
+      }
+
+      setGuess(''); // clear the input field
     }
   };
 
