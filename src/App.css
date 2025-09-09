@@ -89,11 +89,12 @@ html,
 .hover-input {
   padding: 8px 12px;
   border: none;
+  border-radius: 999px;
   font-size: 1.2rem;
   font-family: 'Red Hat Mono', monospace;
   /* width: 200px; */
   text-align: center;
-  background: white;
+  background: rgba(255, 255, 255, 0.88);
   outline: none;
 }
 
@@ -102,11 +103,13 @@ html,
   position: absolute;
   top: 0px;
   right: 0px;
-  padding: 4px 8px;
+  padding: 12px 8px;
   border: none;
-  background: white;
-  font-size: 1.2rem;
-  font-family: 'Red Hat Mono', monospace;
   cursor: pointer;
   outline: none;
+  background: none;
+  color: white;
+}
+.hint-icon {
+  font-size: 2rem;
 }

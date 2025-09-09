@@ -86,21 +86,45 @@ function Cell({
 
   // Called when the user presses Enter in the guess box
   function submitGuess(value) {
-    const trimmed = value.trim();
+    // Clean the incoming value the same way the input does
+    const trimmed = value
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z ]+/g, '');
 
-    // Log to console – replace with an API call if you need persistence
+    // Compare with the solution (also lower‑cased for a case‑insensitive match)
+    const isMatch = trimmed === solution.toLowerCase();
+
+    // Log both strings
     console.log('User guess:', trimmed);
     console.log('Correct solution:', solution);
 
-    // Optional: keep a visible log inside the component (useful while testing)
-    setLog((prev) => [...prev, `guess="${trimmed}" | solution="${solution}"`]);
+    // Indicate match / mismatch
+    if (isMatch) {
+      console.log('✅ Guess matches the solution!');
+    } else {
+      console.log('❌ Guess does NOT match the solution.');
+    }
+
+    // Optional visual log (debug) – shows the result as well
+    setLog((prev) => [
+      ...prev,
+      `guess="${trimmed}" | solution="${solution}" | ${
+        isMatch ? 'MATCH' : 'NO MATCH'
+      }`,
+    ]);
   }
 
-  // Update state as the user types
+  // Update state as the user types – forces lowercase & allows only a‑z and spaces
   const handleInputChange = (e) => {
-    setGuess(e.target.value);
-  };
+    // Grab raw input
+    const raw = e.target.value;
 
+    // Keep only letters a‑z and spaces, then convert to lower‑case
+    const cleaned = raw.toLowerCase().replace(/[^a-z ]+/g, ''); // remove everything else
+
+    setGuess(cleaned);
+  };
   // Detect Enter key → submit the guess
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -150,7 +174,9 @@ function Cell({
       {isHovered && !hintClicked && !isFullyRevealed && (
         <div className='hover-overlay' style={{ zIndex: 2 }}>
           <button className='hover-button' onClick={handleHintButtonClick}>
-            hint
+            <span className='material-symbols-outlined hint-icon'>
+              lightbulb_2
+            </span>
           </button>
           <input
             type='text'
