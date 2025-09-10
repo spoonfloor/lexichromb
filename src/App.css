@@ -3,8 +3,29 @@
   --cell-height: 275px;
   --col-gap: 8px; /* vertical spacing */
   --row-gap: 8px; /* horizontal spacing */
-  --font-size: 1.6rem;
-  --line-height: 1.4;
+  --font-size: 1.2rem;
+  --icon-size: 2.2rem;
+}
+
+@media (max-width: 780px) {
+  :root {
+    --font-size: calc(1.2rem * 1.25);
+    --icon-size: calc(2.2rem * 1.25);
+  }
+}
+
+@media (max-width: 510px) {
+  :root {
+    --font-size: calc(1.2rem * 1.5);
+    --icon-size: calc(2.2rem * 1.5);
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --font-size: calc(1.2rem * 1.75);
+    --icon-size: calc(2.2rem * 1.75);
+  }
 }
 
 body,
@@ -71,7 +92,7 @@ html,
   user-select: none;
   text-align: center;
   padding: 0 12px;
-  line-height: var(--line-height);
+  /* line-height: var(--line-height); */
   text-transform: none;
 
   position: relative;
@@ -87,20 +108,18 @@ html,
   z-index: 0;
 }
 
-/* .cell:hover::before {
-  background: rgba(0, 0, 0, 0.5);
-} */
-
-/* This wraps the main content so we can dim it */
 .cell-content {
   width: 100%;
-  text-align: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   z-index: 1;
   color: inherit;
 }
 
-/* Overlay container shown on hover */
 .hover-overlay {
   position: absolute;
   top: 0;
@@ -113,7 +132,6 @@ html,
   z-index: 2; /* above overlay and content */
 }
 
-/* Input (guess) styling */
 .hover-input {
   padding: 8px 12px;
   border: none;
@@ -123,9 +141,17 @@ html,
   background: rgba(255, 255, 255, 0.88);
   outline: none;
   padding-left: 16px;
+  width: 100%;
 }
 
-/* Button (hint) styling */
+.guess-wrapper {
+  width: 90%; /* relative to the cell */
+  max-width: calc(
+    100% - 32px
+  ); /* account for cell padding (12px left + right) */
+  margin: 0 auto;
+}
+
 .hover-button {
   position: absolute;
   top: 0px;
@@ -138,5 +164,5 @@ html,
   color: white;
 }
 .hint-icon {
-  font-size: 3rem;
+  font-size: var(--icon-size);
 }

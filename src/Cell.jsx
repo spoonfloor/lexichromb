@@ -168,14 +168,16 @@ function Cell({
               lightbulb_2
             </span>
           </button>
-          <input
-            type='text'
-            placeholder='guess!'
-            className='hover-input'
-            value={guess} // controlled component
-            onChange={handleInputChange} // update `guess` state
-            onKeyDown={handleKeyDown} // submit on Enter
-          />
+          <div className='guess-wrapper'>
+            <input
+              type='text'
+              placeholder='guess!'
+              className='hover-input'
+              value={guess}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+            />
+          </div>
         </div>
       )}
     </div>
