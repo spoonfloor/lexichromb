@@ -1,3 +1,12 @@
+:root {
+  --cell-width: 300px;
+  --cell-height: 275px;
+  --col-gap: 8px; /* vertical spacing */
+  --row-gap: 8px; /* horizontal spacing */
+  --font-size: 1.6rem;
+  --line-height: 1.4;
+}
+
 body,
 html,
 #root {
@@ -12,24 +21,43 @@ html,
   box-sizing: border-box;
 }
 
-.app {
+.app-root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px; /* this padding controls your margin; hook reads it */
+  box-sizing: border-box;
+  background: hsl(0, 0%, 10%); /* keep your dark background */
+}
+
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
-  gap: 8px;
+  transform-origin: center center;
+  /* background: lightblue;  */
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--col-gap);
+  width: var(--cell-width); /* match the cell */
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  gap: var(--row-gap);
+  height: 100%;
+  transform-origin: center center;
 }
 
 .cell {
-  height: 275px;
-  width: 300px;
+  width: var(--cell-width);
+  height: var(--cell-height);
   background: white;
 
   display: flex;
@@ -37,13 +65,13 @@ html,
   justify-content: center;
   align-items: center;
 
-  font-size: 1.2rem;
+  font-size: var(--font-size);
   font-family: 'Red Hat Mono', monospace;
 
   user-select: none;
   text-align: center;
   padding: 0 12px;
-  line-height: 1.4;
+  line-height: var(--line-height);
   text-transform: none;
 
   position: relative;
@@ -89,8 +117,8 @@ html,
 .hover-input {
   padding: 8px 12px;
   border: none;
-  border-radius: 999px;
-  font-size: 1.2rem;
+  border-radius: 99px;
+  font-size: var(--font-size);
   font-family: 'Red Hat Mono', monospace;
   background: rgba(255, 255, 255, 0.88);
   outline: none;
@@ -110,5 +138,5 @@ html,
   color: white;
 }
 .hint-icon {
-  font-size: 2rem;
+  font-size: 3rem;
 }
