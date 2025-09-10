@@ -1,5 +1,5 @@
 {
-  "name": "lexichrome",
+  "name": "lexichromb",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },
-  "homepage": "https://spoonfloor.github.io/lexichrome/",
+  "homepage": "https://spoonfloor.github.io/lexichromb/",
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
