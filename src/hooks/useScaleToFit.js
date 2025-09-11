@@ -48,12 +48,15 @@ export default function useScaleToFit(wrapperRef) {
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onResize);
 
-    scaleBox();
+    const timeoutId = setTimeout(() => {
+      scaleBox();
+    }, 100); // 100ms delay to ensure layout is ready
 
     return () => {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('orientationchange', onResize);
       if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(timeoutId);
     };
   }, [wrapperRef]);
 }

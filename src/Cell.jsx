@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function Cell({
   text,
@@ -15,7 +15,8 @@ function Cell({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const [hintClicked, setHintClicked] = useState(false);
-  const [guess, setGuess] = useState(''); // current text in the guess input
+  const [guess, setGuess] = useState('');
+  const inputRef = useRef(null);
 
   const renderPlaceholder = (revealFirstLetter = false) => {
     if (!solution) return null;
@@ -65,6 +66,12 @@ function Cell({
   const textColor = clickCount >= 2 ? getTextColor(textContrast) : 'inherit';
 
   const isFullyRevealed = clickCount === 5;
+
+  useEffect(() => {
+    if (isHovered && !hintClicked && !isFullyRevealed && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isHovered, hintClicked, isFullyRevealed]);
 
   // Handler for cell click (reshow hint UI unless fully solved)
   const handleCellClick = (e) => {
@@ -120,7 +127,10 @@ function Cell({
         alert('Try again, plz…'); // ❌ failure feedback
       }
 
-      setGuess(''); // clear the input field
+      // Dismiss hover and reset states
+      setIsHovered(false);
+      setHintClicked(false);
+      setGuess('');
     }
   };
 
@@ -141,6 +151,7 @@ function Cell({
       onMouseLeave={() => {
         setIsHovered(false);
         setHintClicked(false);
+        setGuess(''); // Clear the input when hover ends
       }}
       onClick={handleCellClick}
     >
@@ -170,6 +181,7 @@ function Cell({
           </button>
           <div className='guess-wrapper'>
             <input
+              ref={inputRef}
               type='text'
               placeholder='guess!'
               className='hover-input'
